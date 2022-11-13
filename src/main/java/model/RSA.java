@@ -36,7 +36,7 @@ public class RSA implements ICippher {
 
 	public PrivateKey readPrivateKey(String key)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, WrongKeySizeException {
-		if (key == null || key.isEmpty() || key.length() != keySize)
+		if (key == null || key.isEmpty())
 			throw new WrongKeySizeException(keySize);
 		PrivateKey privateKey = null;
 		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(key.getBytes()));
@@ -57,8 +57,9 @@ public class RSA implements ICippher {
 
 	public PublicKey readPublicKey(String key)
 			throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, WrongKeySizeException {
-		if (key == null || key.isEmpty() || key.length() != keySize)
-			throw new WrongKeySizeException(keySize);
+		System.out.println("Key size "+keySize);
+		if (key == null || key.isEmpty()) {
+			throw new WrongKeySizeException(keySize);}
 
 		PublicKey publicKey = null;
 
@@ -213,5 +214,8 @@ public class RSA implements ICippher {
 	public void setKeySize(int sizeKey) {
 		keySize = sizeKey;
 
+	}
+	public static void main(String[] args) {
+	
 	}
 }
